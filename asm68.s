@@ -119,11 +119,11 @@ lsrc
 	stx	line
 	ldx	#srcbuf-1	* let X track current source position
 .lxtln	inx
-	stx	linptr	* save start of current line
+	stx	srcptr	* save start of current line
 	ldx	line	* 16-bit increment of line number
 	inx
 	stx	line
-	ldx	linptr	* restore X
+	ldx	srcptr	* restore X
 	bsr	prlnum	* print line # followed by space
 .lslin	clr	column	* reset column
 	ldaa	,x	* read first character of line
@@ -151,11 +151,11 @@ lsrc
 	bra	.lxtln
 *--------------------------------------------------------------------
 .detok	inx		* consume token
-	stx	linptr	* save X
+	stx	srcptr	* save X
 	anda	#$7f	* clear bit 7 of token
 	jsr	idxmne	* get mnemonic name in X
 	jsr	outmne	* print mnemonic at X
-	ldx	linptr	* restore X
+	ldx	srcptr	* restore X
 	subb	#4	* reduce field length
 	ldaa	column
 	adda	#4	* column += 4
@@ -270,11 +270,11 @@ nsrc
 	ldx	#srcbuf	* let X track current source position
 .nxtln
 	clr	curins	* clear current mnemonic
-	stx	xsave	* save X
+	stx	linptr	* save X (start of current line)
 	ldx	line	* 16-bit increment of line number
 	inx
 	stx	line
-	ldx	xsave	* restore X
+	ldx	linptr	* restore X (start of current line)
 	bsr	prlnum	* print line # followed by space
 .rdlin	clr	column	* reset column
 * read fields
@@ -283,10 +283,10 @@ nsrc
 	ldaa	#fields%$100
 	staa	fldptr+1
 .rdfld
-	stx	linptr	* save X (start of current field)
+	stx	srcptr	* save X (start of current field)
 	ldx	fldptr	* read next field length into ACC B
 	ldab	,x
-	ldx	linptr	* restore X
+	ldx	srcptr	* restore X
 .nxtch	jsr	getch	* read char without echo
 	bsr	isend	* check for ESC or EOT (end of input)
 	beq	.nsrc	* return
@@ -388,7 +388,7 @@ fldidx
 	rts
 
 **********************************************************************
-* tokmne(eof) - if in mnemonic field, tokenize mnemonic at linptr
+* tokmne(eof) - if in mnemonic field, tokenize mnemonic at srcptr
 *	- ACC A = end-of-field terminator (FS/NUL)
 *	- return end of line in X
 *	- ACC B NOT preserved
@@ -406,7 +406,7 @@ tokmne
 	stx	mneptr
 .asmne
 	ldab	#4	* ACC B - track mnemonic chars left to consume
-	ldx	linptr	* roll back to start of mnemonic field
+	ldx	srcptr	* roll back to start of mnemonic field
 	ldaa	,x	* read first source char
 	jsr	iseof	* end of field/line (FS/NUL)?
 	beq	.tmemt	* if empty field, exit
@@ -468,7 +468,7 @@ tokmne
 .asopc	jsr	mneidx	* return mnemonic index (1-based)
 	staa	curins	* save current mnemonic
 	oraa	#$80	* set bit 7 to indicate token
-	ldx	linptr	* roll back to start of mnemonic field
+	ldx	srcptr	* roll back to start of mnemonic field
 	staa	,x	* store mnemonic token
 	inx
 .tmemt	pula		* restore argument/result
@@ -762,11 +762,11 @@ asrc
 	stx	line
 	ldx	#srcbuf	* let X track current source position
 * assemle next line
-.asnxl	stx	linptr	* save start of current line
+.asnxl	stx	srcptr	* save start of current line
 	ldx	line	* 16-bit increment of line number
 	inx
 	stx	line
-	ldx	linptr	* restore X
+	ldx	srcptr	* restore X
 	clrb		* track label length in ACC B
 	ldaa	,x	* read first character of line
 	bne	.aneos	* if NUL, end of source, else see below
@@ -880,7 +880,7 @@ prtadr	ldaa	0,x	* subroutine: print address at X
 .aslel	dex		* EOL, back up to cancel out next inx
 * reached end of field/line, with (ACC B ≠ 0) or without (ACC B = 0) label
 .aslbe	inx		* advance to next source character
-	stx	linptr	* save pointer to mnemonic or EOL
+	stx	srcptr	* save pointer to mnemonic or EOL
 	stab	lbllen	* store length of label and set flags
 	beq	.asmnf	* no label, proceed to mnemonic
 	tst	lclflg	* test local flag
@@ -905,7 +905,7 @@ prtadr	ldaa	0,x	* subroutine: print address at X
 	stx	symptr	* save pointer to symbol
 * handle mnemonic field
 .asmnf
-	ldx	linptr	* restore current source pointer
+	ldx	srcptr	* restore current source pointer
 	ldaa	,x	* read first character of mnemonic field
 	bne	.asmnn	* skip if not NUL (end-of-line)
 	inx		* consume NUL character
@@ -981,12 +981,12 @@ prtadr	ldaa	0,x	* subroutine: print address at X
 	ldaa	curins	* reload current insruction
 	cmpa	#ORG	* check for ORG pseudo-op
 	bne	.ntorg
-	stx	linptr	* save source position
+	stx	srcptr	* save source position
 	jsr	clsmod	* close current module
 	ldx	curopd	* ORG: copy operand to PC
 	stx	prgctr
 	stx	modptr
-	ldx	linptr	* restore source position
+	ldx	srcptr	* restore source position
 .goeol	bra	.aseol	* skip to end of line
 *--------------------------------------------------------------------
 .ntorg
@@ -1045,14 +1045,14 @@ prtadr	ldaa	0,x	* subroutine: print address at X
 	clra		* use zero displacement for fwdref
 	bra	.stdsp	* and continue below
 *--------------------------------------------------------------------
-.notfw	stx	linptr	* save source position
+.notfw	stx	srcptr	* save source position
 	ldx	prgctr	* X = PC of next instruction
 	inx		* (prgctr points at branch operand)
 	bsr	cvtrel	* convert AB to PC-relative address
 	bpl	.fwdbr
 	inca		* MSB should be $FF for reverse branch
 .fwdbr	tpa		* save test status of MSB in ACC A
-	ldx	linptr	* restore source position
+	ldx	srcptr	* restore source position
 	tap		* restore status of MSB from ACC A
 	bne	.aser6	* MSB must be zero, else out of range
 	tba		* move displacement to ACC A
@@ -1072,7 +1072,7 @@ prtadr	ldaa	0,x	* subroutine: print address at X
 	inx
 	tsta		* check for nul
 	bne	.aseol	* skip until end of line
-	stx	linptr	* update line pointer
+	stx	srcptr	* update line pointer
 	jmp	.asnxl	* proceed to next line
 *--------------------------------------------------------------------
 .aser5	ldaa	#5	* error: invalid instruction
@@ -1325,11 +1325,11 @@ rdexpr
 	bsr	iseof	* is FS/NUL?
 	beq	.rerok	* if so, return success status
 
-	stx	linptr	* save X
+	stx	srcptr	* save X
 	ldx	#binops	* X = pointer to binops table
 .reopl	ldab	,x	* ACC B = operator from table
 	bne	.reopx	* if not NUL, skip
-	ldx	linptr	* else, restore X
+	ldx	srcptr	* else, restore X
 	bra	.rerok	* and return success status
 *--------------------------------------------------------------------
 .reopx	inx		* advance to operation address field
@@ -1341,18 +1341,18 @@ rdexpr
 *--------------------------------------------------------------------
 .reopm	ldx	,x	* load operation address
 	jsr	xpshx	* and push it on X stack
-	ldx	linptr	* restore X
+	ldx	srcptr	* restore X
 	inx		* consume operator character
 	bsr	rdvalu	* read next value
 	beq	.rerok	* return original value if none found
-	stx	linptr	* save X
+	stx	srcptr	* save X
 	jsr	xpulx	* reload operation address
 	staa	absave	* save returned value
 	stab	absave+1
 	pula		* reload previous expr value
 	pulb
 	jsr	,x	* perform operation
-	ldx	linptr	* restore X
+	ldx	srcptr	* restore X
 	pshb		* push result on stack
 	psha
 	bra	.renxt	* and loop
@@ -1366,7 +1366,7 @@ rdexpr
 * 	 - returns with Z=0 if expression found, Z=1 if not found
 **********************************************************************
 rdvalu
-	stx	linptr	* lineptr = first digit/char/symbol
+	stx	srcptr	* lineptr = first digit/char/symbol
 	clra		* set initial value to 0
 	clrb
 	jsr	dpshab	* push it onto data stack
@@ -1377,11 +1377,11 @@ rdvalu
 	inc	negflg	* else, set negative flag
 	inx		* consume '-'
 	ldaa	,x	* read source char into ACC A
-	stx	linptr	* lineptr = first digit/char/symbol
+	stx	srcptr	* lineptr = first digit/char/symbol
 .ntneg
 	cmpa	#'''	* check for character
 	bne	.ntchr
-	stx	linptr	* lineptr = first digit/char/symbol
+	stx	srcptr	* lineptr = first digit/char/symbol
 	inx		* consume quote
 	ldaa	,x	* read source char into ACC A
 	bsr	iseof	* check for FS/EOL
@@ -1439,7 +1439,7 @@ rdvalu
 	tst	fwdrok	* fwdref allowed?
 	bne	.mkfwr	* if fwdref allowed, skip
 	jsr	xpulx
-	stx	linptr	* advance linptr to indicate failure
+	stx	srcptr	* advance srcptr to indicate failure
 	jsr	xpshx
 	bra	.rffff	* return placeholder address
 *--------------------------------------------------------------------
@@ -1488,7 +1488,7 @@ rdvalu
 	ldaa	#16	* switch to hexadecimal
 	staa	valbas
 	inx		* temporarily advance to next char
-	stx	linptr	* lineptr = first digit/char/symbol
+	stx	srcptr	* lineptr = first digit/char/symbol
 	dex		* compensate for next inx
 .rdxch	inx		* consume character
 	ldaa	,x	* read next source char
@@ -1525,7 +1525,7 @@ rdvalu
 	tst	negflg	* check negative flag
 	beq	.rxsts	* if negflg=0, return
 	bsr	negab	* else, negate result
-.rxsts	cpx	linptr	* set exit status
+.rxsts	cpx	srcptr	* set exit status
 	rts		* return
 
 **********************************************************************

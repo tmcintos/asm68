@@ -95,6 +95,7 @@ curmod	equ	$0042	* (1 byte) current addressing mode
 valbas	equ	$0043	* (1 byte) numeric base of expression
 curopd	equ	$0044	* (2 bytes) current operand
 modptr	equ	$0046	* (2 bytes) start of current module
+srcptr	equ	$0048	* (2 bytes) saved position in srcbuf
 
 datasp	equ	$0080	* (2 bytes) data stack pointer
 xstksp	equ	$0082	* (2 bytes) X stack pointer
