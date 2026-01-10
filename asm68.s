@@ -309,13 +309,13 @@ nsrc
 *--------------------------------------------------------------------
 .notcr	cmpa	#BSIN
 	bne	.notbs	* if BS, delete typed characters...
+	ldx	linptr	* restore X (start of current line)
 	inc	column	* column++
 .bkspc	dec	column	* column--
 	beq	.rdlin	* already at start of line?
-	ldaa	#BS
+	ldaa	#BS	* no, emit backspace character
 	jsr	ECHO
-	dex
-	bra	.bkspc
+	bra	.bkspc	* and loop
 *--------------------------------------------------------------------
 .notbs
 * XXX this doesn't work because same condition occurs at end of field:
