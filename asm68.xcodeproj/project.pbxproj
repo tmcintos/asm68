@@ -16,7 +16,6 @@
 		7B1723042EE49BAA00CCDFD9 /* addsubtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = addsubtst.s; sourceTree = "<group>"; };
 		7B1723052EE49E1200CCDFD9 /* div16.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = div16.s; sourceTree = "<group>"; };
 		7B1723062EE4A1B900CCDFD9 /* divtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = divtst.s; sourceTree = "<group>"; };
-		7B1723072EE4AA5100CCDFD9 /* divs16.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = divs16.s; sourceTree = "<group>"; };
 		7B1723082EE4B73F00CCDFD9 /* exprtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = exprtst.s; sourceTree = "<group>"; };
 		7B1723092EE52C3900CCDFD9 /* setjmp.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = setjmp.s; sourceTree = "<group>"; };
 		7B17230A2EE80D7700CCDFD9 /* modtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = modtst.s; sourceTree = "<group>"; };
@@ -64,7 +63,6 @@
 				7B1723012EE4994500CCDFD9 /* binop.s */,
 				7B1722FF2EE496FD00CCDFD9 /* data.s */,
 				7B1723052EE49E1200CCDFD9 /* div16.s */,
-				7B1723072EE4AA5100CCDFD9 /* divs16.s */,
 				7B1722FD2EE4946300CCDFD9 /* mult16.s */,
 				7B1723092EE52C3900CCDFD9 /* setjmp.s */,
 				7B1722FE2EE496A000CCDFD9 /* opcode.s */,
