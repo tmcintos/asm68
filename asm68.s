@@ -1774,17 +1774,17 @@ mul2ab
 
 * XXX hack to print resulting values
 prntab
-	psha
-	pshb
-	stx	xsave
-	ldx	#dbgstr
-	jsr	puts
-	jsr	PRBYTE	* print ACC A
-	jsr	outsp
-	tba
-	jsr	PRBYTE	* print ACC B
-	jsr	newline
-	ldx	xsave
-	pulb
-	pula
+*	psha
+*	pshb
+*	stx	xsave
+*	ldx	#dbgstr
+*	jsr	puts
+*	jsr	PRBYTE	* print ACC A
+*	jsr	outsp
+*	tba
+*	jsr	PRBYTE	* print ACC B
+*	jsr	newline
+*	ldx	xsave
+*	pulb
+*	pula
 	rts
