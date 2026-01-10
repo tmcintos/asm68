@@ -1533,38 +1533,37 @@ rdvalu
 * xpshx - push X onto data stack
 **********************************************************************
 xpshx
-	pshb		* save B
 	psha		* save A
-	stx	xsave	* save X
+	tpa		* save flags in ACC A
 	sts	ssave	* save S
-	lds	xstksp	* load X stack pointer
-	ldaa	xsave	* ACC A = MSB of X
-	ldab	xsave+1	* ACC B = LSB of X
-	pshb		* push LSB onto data stack
-	psha		* push MSB onto data stack
-	sts	xstksp	* save X stack pointer
+	inx		* compensate for tsx
+	txs		* S = saved X
+	ldx	xstksp	* load X stack pointer
+	dex		* push value on stack
+	dex
+	sts	1,x
+	stx	xstksp	* update X stack pointer
+	tsx		* restore X
+	dex		* (undo initial inx above)
 	lds	ssave	* restore S
+	tap		* restore flags
 	pula		* restore A
-	pulb		* restore B
 	rts
 
 **********************************************************************
 * xpulx - pull X from data stack
 **********************************************************************
 xpulx
-	pshb		* save B
 	psha		* save A
-	sts	ssave	* save S
-	lds	xstksp	* load X stack pointer
-	pula		* pull X MSB from data stack
-	pulb		* pull X LSB from data stack
-	staa	xsave	* save X MSB in memory
-	stab	xsave+1	* save X LSB in memory
-	sts	xstksp	* save X stack pointer
-	lds	ssave	* restore S
+	tpa		* save flags in ACC A
+	ldx	xstksp	* load X stack pointer
+	inx		* pop 2 bytes
+	inx
+	stx	xstksp	* update X stack pointer
+	dex		* point at popped value
+	ldx	,x	* load and return it
+	tap		* restore flags
 	pula		* restore A
-	pulb		* restore B
-	ldx	xsave	* reload X from memory
 	rts
 
 **********************************************************************
