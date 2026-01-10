@@ -92,7 +92,7 @@ Address Range		|	Description
 --------------	|	--------------------
 `$0000..$00FF`	|	Zero page variables (256B)
 `$0100..$01FF`	|	6800 stack (256B)
-`$0200..$02FF	`	|	Keyboard buffer (256B)
+`$0200..$02FF`	|	Keyboard buffer (256B)
 `$0300..$0BFF`	|	Program buffer (2K+256B)
 `$0C00..$0DFF`	|	Global symbol table (512B)
 `$0E00..$0EFF`	|	Local symbol table (256B)
@@ -106,7 +106,7 @@ Address Range		|	Description
 --------------	|	--------------------
 `$0000..$00FF`	|	Zero page variables (256B)
 `$0100..$01FF`	|	6800 stack (256B)
-`$0200..$02FF	`	|	Keyboard buffer (256B)
+`$0200..$02FF`	|	Keyboard buffer (256B)
 `$0300..$04FF`	|	Program buffer (512B)
 `$0500..$0CFF`	|	Source buffer (2K)
 `$0D00..$0DFF`	|	Global symbol table (256B)
@@ -120,7 +120,7 @@ Address Range		|	Description
 --------------	|	--------------------
 `$0000..$00FF`	|	Zero page variables (256B)
 `$0100..$01FF`	|	6800 stack (256B)
-`$0200..$02FF	`	|	Keyboard buffer (256B)
+`$0200..$02FF`	|	Keyboard buffer (256B)
 `$0300..$1FFF`	|	Program buffer (7.25K)
 `$2000..$9FFF`	|	Source buffer (32K)
 `$A000..$AFFF`	|	Global symbol table (4K)
@@ -134,7 +134,7 @@ Address Range		|	Description
 --------------	|	--------------------
 `$0000..$00FF`	|	Zero page variables (256B)
 `$0100..$01FF`	|	6800 stack (256B)
-`$0200..$02FF	`	|	Keyboard buffer (256B)
+`$0200..$02FF`	|	Keyboard buffer (256B)
 `$0300..$1FFF`	|	Program buffer (7.25K)
 `$2000..$90FF`	|	Source buffer (28.25K)
 `$9100..$9FFF`	|	Assembler (3.75K)
@@ -148,7 +148,7 @@ Address Range		|	Description
 --------------	|	--------------------
 `$0000..$00FF`	|	Zero page variables (256B)
 `$0100..$01FF`	|	6800 stack (256B)
-`$0200..$02FF	`	|	Keyboard buffer (256B)
+`$0200..$02FF`	|	Keyboard buffer (256B)
 `$0300..$1FFF`	|	Program buffer (7.25K)
 `$2000..$64FF`	|	Source buffer (17.25K)
 `$6500..$6CFF`	|	Global symbol table (2K)
