@@ -812,12 +812,12 @@ asrc
 	ldab	absave+1
 	ldx	fwdref	* reload symbol table entry pointer
 	tst	REFPCR,x	* check for PC-relative fwdref
-	bpl	.2bref
-	ldx	SYMADR,x	* load address of operand to patch
-	inx		* XXX advance past branch displacement
+	bpl	.2bref	* (absolute case (2bref) handled below)
+	ldx	SYMADR,x	* X = PC of branch displacement to patch
+	inx		* X = PC of next instruction
 	jsr	cvtrel	* convert AB to X-relative address
-	dex
-	stab	,x	* patch displacement
+	dex		* X = PC of branch displacement to patch
+	stab	,x	* patch branch displacement
 	bra	.anxfr	* proceed to next table entry
 *--------------------------------------------------------------------
 .2bref	ldx	SYMADR,x	* load address to patch
