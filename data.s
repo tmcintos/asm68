@@ -10,7 +10,7 @@
 **********************************************************************
 
 * field widths (nul-terminated)
-fields	fcb	6,4,14,9,0	* label,mnemonic,args,comment
+fields	fcb	6,4,14,9	* label,mnemonic,args,comment
 
 hello	fcc	"asm68 v0.1"
 	fcb	CR,NUL

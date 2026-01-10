@@ -303,7 +303,7 @@ nsrc
 .ntblk	ldaa	#NUL	* ACC A = end-of-line marker (NUL)
 	staa	,x	* store here & pass to tokmne below
 	inx
-	bsr	tokmne	* tokenize mnemonic field if needed
+	jsr	tokmne	* tokenize mnemonic field if needed
 	bsr	newline	* output newline
 	bra	.nxtln	* read next input line
 *--------------------------------------------------------------------
@@ -318,9 +318,6 @@ nsrc
 	bra	.bkspc	* and loop
 *--------------------------------------------------------------------
 .notbs
-* XXX this doesn't work because same condition occurs at end of field:
-*	tstb		* check for last field
-*	beq	.nxtch	* drop character if last field
 	bsr	fldsp	* check for field separator
 	bne	.notfs
 	ldaa	#FS	* got field separator, store FS
@@ -330,7 +327,7 @@ nsrc
 	beq	.advfd	* at end, move to next field
 .padfd	jsr	outsp	* pad with space until end is reached
 	inc	column	* column++
-	decb
+	decb		* reduce field length
 	beq	.advfd	* at end, move to next field
 	bra	.padfd
 *--------------------------------------------------------------------
@@ -373,11 +370,15 @@ fldsp
 	bsr	fldidx	* get current field index
 	cmpa	#COMENT	* compare to comment field position
 	pula		* restore A
-	bhs	.nospc	* allow spaces in comments
+	bhs	.ignfs	* ignore field separators in comment field
 	cmpa	#' '
 	beq	.fldsp
 .nospc	cmpa	#HT
 .fldsp	rts
+.ignfs	cmpa	#HT
+	bne	.fldsp
+	ldaa	#' '	* replace tab with space, sets Z=0
+	rts
 
 **********************************************************************
 * fldidx - Returns current field index in ACC A
