@@ -1,0 +1,64 @@
+**********************************************************************
+*  div16.s
+*  asm68
+*
+*  Created by Tim McIntosh on 12/6/25.
+*
+*  From Motorola M6800 User Group Library:
+* - REENTRANT 16-BIT DIVIDE (Routine 008)
+**********************************************************************
+
+*	NAM DIV16
+*      REVISION 1
+*      16 BIT UNSIGNED DIVIDE (16 BIT RESULT)
+*      A,B DIVIDED BY (S+3),(S+4)
+*      RESULT QUOTIENT IN A,B, REMAINDER IN (S+3),(S+4)
+*      CLOBBERS X
+DIV16	PSHB  DIVIDEND TO STACK
+	PSHA
+	DES  LEAVE ROOOM FOR COUNT
+	TSX  (X) POINTER TO STACKED DATA
+	LDAA #1
+	TST 5,X
+	BMI DIV153
+DIV151	INCA
+	ASL 6,X
+	ROL 5,X
+	BMI DIV153
+	CMPA #17
+	BNE DIV151
+DIV153	STAA 0,X SAVE COUNT
+	LDAA 1,X
+	LDAB 2,X
+	CLR 1,X
+	CLR 2,X
+*      STACK LOOKS LIKE
+*      +0 COUNT
+*      +1 MS BYTE OF DIVIDEND
+*      +2 LS BYTE
+*      +3 MS BYTE RETURN ADDRESS
+*      +4 LS BYTE
+*      +5 MS BYTE OF DIVISOR
+*      +6 LS BYTE
+DIV163	SUBB 6,X
+	SBCA 5,X
+	BCC DIV165 DIVISOR STILL OK
+	ADDB 6,X DIVISOR TOO LARGE
+	ADCA 5,X RESTORE
+	CLC
+	BRA DIV167
+DIV165	SEC
+DIV167	ROL 2,X
+	ROL 1,X
+	LSR 5,X ADJUST DIVISOR
+	ROR 6,X
+	DEC 0,X
+	BNE DIV163
+	STAA 5,X REMAINDER TO STACK
+	STAB 6,X
+*	CLEAN UP STACK
+	INS
+	PULA
+	PULB
+	RTS
+*	END

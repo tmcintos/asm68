@@ -1,0 +1,294 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXFileReference section */
+		7B1722FD2EE4946300CCDFD9 /* mult16.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = mult16.s; sourceTree = "<group>"; };
+		7B1722FE2EE496A000CCDFD9 /* opcode.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = opcode.s; sourceTree = "<group>"; };
+		7B1722FF2EE496FD00CCDFD9 /* data.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = data.s; sourceTree = "<group>"; };
+		7B1723002EE4973E00CCDFD9 /* hello.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = hello.s; sourceTree = "<group>"; };
+		7B1723012EE4994500CCDFD9 /* binop.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = binop.s; sourceTree = "<group>"; };
+		7B1723032EE49AEA00CCDFD9 /* multst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = multst.s; sourceTree = "<group>"; };
+		7B1723042EE49BAA00CCDFD9 /* addsubtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = addsubtst.s; sourceTree = "<group>"; };
+		7B1723052EE49E1200CCDFD9 /* div16.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = div16.s; sourceTree = "<group>"; };
+		7B1723062EE4A1B900CCDFD9 /* divtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = divtst.s; sourceTree = "<group>"; };
+		7B1723072EE4AA5100CCDFD9 /* divs16.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = divs16.s; sourceTree = "<group>"; };
+		7B1723082EE4B73F00CCDFD9 /* exprtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = exprtst.s; sourceTree = "<group>"; };
+		7B1723092EE52C3900CCDFD9 /* setjmp.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = setjmp.s; sourceTree = "<group>"; };
+		7B17230A2EE80D7700CCDFD9 /* modtst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = modtst.s; sourceTree = "<group>"; };
+		7B17230B2EE8F87300CCDFD9 /* bitoptst.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = bitoptst.s; sourceTree = "<group>"; };
+		7B21341A2EAC61B8002DDBF2 /* Makefile */ = {isa = PBXFileReference; indentWidth = 8; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; tabWidth = 8; usesTabs = 1; };
+		7B21341B2EADA2BA002DDBF2 /* asm68.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = asm68.s; sourceTree = "<group>"; };
+		7B416E972EEE709B00024817 /* start.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = start.s; sourceTree = "<group>"; };
+		7B416E982EF901F600024817 /* defs.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = defs.s; sourceTree = "<group>"; };
+		7B416E992EF902CD00024817 /* w68ram.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = w68ram.s; sourceTree = "<group>"; };
+		7B416E9A2EF9213B00024817 /* w68rom.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = w68rom.s; sourceTree = "<group>"; };
+		7B416E9B2EF9236000024817 /* 32kram.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = 32kram.s; sourceTree = "<group>"; };
+		7B54665D2F0CC9D200E12D77 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7B54665E2F0DA19200E12D77 /* 8ka1rom.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = 8ka1rom.s; sourceTree = "<group>"; };
+		7B54666A2F0DD9DA00E12D77 /* 8ka1ram.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = 8ka1ram.s; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		7B1723022EE49A6D00CCDFD9 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				7B1723002EE4973E00CCDFD9 /* hello.s */,
+				7B1723042EE49BAA00CCDFD9 /* addsubtst.s */,
+				7B1723062EE4A1B900CCDFD9 /* divtst.s */,
+				7B1723032EE49AEA00CCDFD9 /* multst.s */,
+				7B1723082EE4B73F00CCDFD9 /* exprtst.s */,
+				7B17230A2EE80D7700CCDFD9 /* modtst.s */,
+				7B17230B2EE8F87300CCDFD9 /* bitoptst.s */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		7B21340E2EAC5FFF002DDBF2 = {
+			isa = PBXGroup;
+			children = (
+				7B54665D2F0CC9D200E12D77 /* README.md */,
+				7B21341A2EAC61B8002DDBF2 /* Makefile */,
+				7B416E992EF902CD00024817 /* w68ram.s */,
+				7B416E9A2EF9213B00024817 /* w68rom.s */,
+				7B416E9B2EF9236000024817 /* 32kram.s */,
+				7B54666A2F0DD9DA00E12D77 /* 8ka1ram.s */,
+				7B54665E2F0DA19200E12D77 /* 8ka1rom.s */,
+				7B416E982EF901F600024817 /* defs.s */,
+				7B416E972EEE709B00024817 /* start.s */,
+				7B21341B2EADA2BA002DDBF2 /* asm68.s */,
+				7B1723012EE4994500CCDFD9 /* binop.s */,
+				7B1722FF2EE496FD00CCDFD9 /* data.s */,
+				7B1723052EE49E1200CCDFD9 /* div16.s */,
+				7B1723072EE4AA5100CCDFD9 /* divs16.s */,
+				7B1722FD2EE4946300CCDFD9 /* mult16.s */,
+				7B1723092EE52C3900CCDFD9 /* setjmp.s */,
+				7B1722FE2EE496A000CCDFD9 /* opcode.s */,
+				7B1723022EE49A6D00CCDFD9 /* tests */,
+			);
+			indentWidth = 15;
+			sourceTree = "<group>";
+			tabWidth = 15;
+			usesTabs = 1;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		7B2134132EAC5FFF002DDBF2 /* asm68 */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "-C $(OBJROOT) -f $(SRCROOT)/Makefile DSTROOT=$(BUILT_PRODUCTS_DIR) $(ACTION)";
+			buildConfigurationList = 7B2134162EAC5FFF002DDBF2 /* Build configuration list for PBXLegacyTarget "asm68" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = asm68;
+			packageProductDependencies = (
+			);
+			passBuildSettingsInEnvironment = 1;
+			productName = asm68;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		7B21340F2EAC5FFF002DDBF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					7B2134132EAC5FFF002DDBF2 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 7B2134122EAC5FFF002DDBF2 /* Build configuration list for PBXProject "asm68" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7B21340E2EAC5FFF002DDBF2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7B2134132EAC5FFF002DDBF2 /* asm68 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		7B2134142EAC5FFF002DDBF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 99G5CXS358;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		7B2134152EAC5FFF002DDBF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 99G5CXS358;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+			};
+			name = Release;
+		};
+		7B2134172EAC5FFF002DDBF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 99G5CXS358;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7B2134182EAC5FFF002DDBF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 99G5CXS358;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7B2134122EAC5FFF002DDBF2 /* Build configuration list for PBXProject "asm68" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B2134142EAC5FFF002DDBF2 /* Debug */,
+				7B2134152EAC5FFF002DDBF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B2134162EAC5FFF002DDBF2 /* Build configuration list for PBXLegacyTarget "asm68" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B2134172EAC5FFF002DDBF2 /* Debug */,
+				7B2134182EAC5FFF002DDBF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7B21340F2EAC5FFF002DDBF2 /* Project object */;
+}
