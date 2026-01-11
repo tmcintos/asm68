@@ -52,7 +52,7 @@ Unless otherwise specified, the assembler generally follows the source conventio
 
 ### Extensions
 
-- ‘.’ may be used as PC
+- `.` may be used as PC
 - `;` may be used instead of `*` to introduce comments
 - `\` may be used to continue a line
 
@@ -67,6 +67,7 @@ Unless otherwise specified, the assembler generally follows the source conventio
 
 ### Unimplemented features
 
+- `*` as PC in expressions
 - `@` octal prefix
 - `%` binary prefix
 - `$` in symbol name
