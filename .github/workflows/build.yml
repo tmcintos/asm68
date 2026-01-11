@@ -1,0 +1,63 @@
+name: Build asm68
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout into a subdirectory named 'asm68'
+      - name: Checkout asm68
+        uses: actions/checkout@v4
+        with:
+          path: asm68
+
+      - name: Install Build Essentials
+        run: sudo apt-get update && sudo apt-get install -y make gcc
+
+      # 2. Setup tools using 'make install'
+      - name: Setup M6800 Cross Assembler
+        run: |
+          git clone https://github.com/tmcintos/motorola-6800-assembler.git
+          cd motorola-6800-assembler
+          make
+          sudo make install
+
+      - name: Setup Hex2bin
+        run: |
+          git clone https://github.com/tmcintos/Hex2bin-2.5.git
+          cd Hex2bin-2.5
+          make
+          sudo make install
+
+      - name: Setup bintomon
+        run: |
+          git clone https://github.com/jefftranter/6502.git
+          cd 6502/util/bintomon
+          gcc bintomon.c -o bintomon
+          sudo install -m 755 bintomon /usr/local/bin/
+
+      # 3. Build inside the subdirectory
+      - name: Build asm68
+        working-directory: ./asm68
+        run: make
+
+      # 4. Upload using the native artifact action
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: asm68-release
+          # This list mimics your zip command exactly.
+          # Because all paths start with 'asm68/', 
+          # the resulting zip will contain the 'asm68' folder.
+          path: |
+            asm68/*-unified.s
+            asm68/*.bin
+            asm68/*.hex
+            asm68/*.s19
