@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		7B11D8012F133CB40040327E /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = build.yml; path = .github/workflows/build.yml; sourceTree = SOURCE_ROOT; };
 		7B1722FD2EE4946300CCDFD9 /* mult16.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = mult16.s; sourceTree = "<group>"; };
 		7B1722FE2EE496A000CCDFD9 /* opcode.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = opcode.s; sourceTree = "<group>"; };
 		7B1722FF2EE496FD00CCDFD9 /* data.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = data.s; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				7B54665D2F0CC9D200E12D77 /* README.md */,
+				7B11D8012F133CB40040327E /* build.yml */,
 				7B21341A2EAC61B8002DDBF2 /* Makefile */,
 				7B416E992EF902CD00024817 /* w68ram.s */,
 				7B416E9A2EF9213B00024817 /* w68rom.s */,
