@@ -1,16 +1,17 @@
-name: Build asm68
+name: Build and Release asm68
 
 on:
   push:
     branches: [ "**" ]
   pull_request:
     branches: [ main ]
+  release:
+    types: [published]    # This triggers when you click "Publish" in the Web UI
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       # 1. Checkout into a subdirectory named 'asm68'
       - name: Checkout asm68
@@ -53,12 +54,35 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: asm68-release
-          # This list mimics your zip command exactly.
-          # Because all paths start with 'asm68/', 
-          # the resulting zip will contain the 'asm68' folder.
           path: |
             asm68/*-unified.s
             asm68/*.bin
             asm68/*.hex
             asm68/*.s19
             asm68/*.mot2bin
+
+  release:
+      needs: build
+      if: github.event_name == 'release'
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - name: Download Artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: asm68-release
+            path: release-assets
+
+        - name: Create ZIP for Release
+          run: |
+            cd release-assets
+            # Uses the tag name from the Web UI for the filename
+            zip -r ../asm68-${{ github.event.release.tag_name }}.zip .
+
+        - name: Upload to Existing Release
+          uses: softprops/action-gh-release@v2
+          with:
+            # This 'files' line tells the action to attach the ZIP to the release that triggered it
+            files: asm68-${{ github.event.release.tag_name }}.zip
+            tag_name: ${{ github.event.release.tag_name }}
