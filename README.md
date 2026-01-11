@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/tmcintos/asm68/actions/workflows/build.yml/badge.svg)](https://github.com/tmcintos/asm68/actions)
+
 # asm68
 
 This is an interactive [MC6800](https://en.wikipedia.org/wiki/Motorola_6800) [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) for [WOZNIAC-68](https://apps.apple.com/app/wozniac-68/id6736677781), inspired by [KRUSADER](https://github.com/tmcintos/krusader).
@@ -30,7 +32,9 @@ A field may be empty. Empty fields at the end of the line may be omitted.
 
 If a field begins with `*`, or if the mnemonic field is empty, the rest of the line is treated as a comment.
 
-When inputting a new program, a space or tab character causes the assembler to advance to the next field, until the end of line is reached. A carriage return causes the assembler to advance to the next line. Escape causes the assembler to exit program entry mode and return to the prompt.
+When inputting a new program, a space or tab character causes the assembler to advance to the next field until the end of line is reached. An exception to this is that spaces are treated literally within strings (`FCC` directive). A carriage return causes the assembler to advance to the next line. Escape causes the assembler to exit program entry mode and return to the prompt.
+
+An example program is provided in [tests/hello.s](tests/hello.s).
 
 ## Limitations
 
@@ -46,7 +50,7 @@ Unless otherwise specified, the assembler generally follows the source conventio
 
 ### Differences
 
-- Fields must be separated by exactly one tab or space character.
+- Fields must be separated by **exactly one tab or space character**
 - All expressions evaluated as unsigned 16-bit.
 - FCB,FDB do not accept lists containing null items (e.g. `,,`).
 
