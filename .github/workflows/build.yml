@@ -61,3 +61,4 @@ jobs:
             asm68/*.bin
             asm68/*.hex
             asm68/*.s19
+            asm68/*.mot2bin
