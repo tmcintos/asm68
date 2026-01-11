@@ -22,7 +22,7 @@ LAYOUTS	= w68ram w68rom 32kram 8ka1rom 8ka1ram
 
 .s19.bin: 
 	mot2bin -o $@ -p 0 $< | tee $*.mot2bin
-	LOAD=`grep 'Binary file start = ' $*.mot2bin | cut -w -f5`; \
+	LOAD=`grep 'Binary file start = ' $*.mot2bin | cut -d' ' -f5`; \
 	bintomon -l 0x$$LOAD $@ > $*.hex
 
 .DEFAULT: all
