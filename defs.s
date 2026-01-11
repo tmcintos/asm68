@@ -18,6 +18,7 @@ BSIN	equ	$5F	* Apple-1 uses _ key as rubout
 HT	equ	$09	* ASCII horizontal tab
 CR	equ	$0D	* ASCII carriage return
 ESC	equ	$1B	* ASCII escape
+CONT	equ	$5C	* ASCII backslash (line continuation)
 
 _	equ	$7F	* we use $7F (DEL) as underscore
 
@@ -83,7 +84,7 @@ opcptr	equ	$001E	* (2 bytes) current opcode entry during search
 jmpbuf	equ	$0020	* (4 bytes) stack pointer (S) to restore
 * $24-$38 reserved by wozmon
 symoff	equ	$0039	* (1 byte) symbol definition offset
-* $3A-$3B available
+cntflg	equ	$003A	* (1 byte) line continuation flag
 fwdrok	equ	$003C	* (1 byte) forward ref allowed?
 column	equ	$003D	* (1 byte) column index (n/l commands)
 mneitr	equ	$003E	* (1 byte) mnemonic search pass count

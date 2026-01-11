@@ -264,6 +264,7 @@ isend
 *--------------------------------------------------------------------
 nsrc
 	clr	qotflg	* clear quote flag
+	clr	cntflg	* clear continuation flag
 * initialize current line = 0
 	ldx	#-1	* init line number to -1
 	stx	line
@@ -291,15 +292,34 @@ nsrc
 	bsr	isend	* check for ESC or EOT (end of input)
 	beq	.nsrc	* return
 	bsr	iscom	* check for comment character
-	bne	.ntcom	* if not comment, continue below
+	bne	.cntchk	* if not comment, check continuation
 	bsr	lincom	* set up for line comment
+	bra	.ntcom
+*--------------------------------------------------------------------
+.cntchk	cmpa	#CONT	* check for continuation char '\'
+	bne	.ntcom	* if not continuation, continue below
+	tst	qotflg	* in quote mode?
+	bne	.ntcom	* if in quotes, treat as regular character
+	ldaa	#CR	* continuation char at end of line
+	jsr	ECHO	* echo CR only, not backslash
+	bra	.nxtch	* continue reading (skip storing '\')
+*--------------------------------------------------------------------
 .ntcom	cmpa	#CR	* end of line?
 	bne	.notcr	* skip if not end of line
+	tst	cntflg	* check continuation flag
+	bne	.cntcr	* if continuing, handle below
 	tst	column	* blank line?
 	bne	.ntblk	* skip if not blank line
 	ldaa	#EMPTY	* store blank line marker
 	staa	,x
 	inx
+*--------------------------------------------------------------------
+* cntcr - Handle carriage return with continuation active
+**********************************************************************
+.cntcr	clr	cntflg	* clear continuation flag
+	bsr	newline	* output newline
+	bra	.nxtch	* continue reading same line
+*--------------------------------------------------------------------
 .ntblk	ldaa	#NUL	* ACC A = end-of-line marker (NUL)
 	staa	,x	* store here & pass to tokmne below
 	inx
@@ -309,13 +329,18 @@ nsrc
 *--------------------------------------------------------------------
 .notcr	cmpa	#BSIN
 	bne	.notbs	* if BS, delete typed characters...
-	ldx	linptr	* restore X (start of current line)
+	tst	cntflg	* check continuation flag
+	beq	.bkspc	* if not continuing, normal backspace
+	clr	cntflg	* else, clear continuation flag
+	bra	.rdlin		* and restart line input
+*--------------------------------------------------------------------
+.bkspc	ldx	linptr	* restore X (start of current line)
 	inc	column	* column++
-.bkspc	dec	column	* column--
+.bspcl	dec	column	* column--
 	beq	.rdlin	* already at start of line?
 	ldaa	#BS	* no, emit backspace character
 	jsr	ECHO
-	bra	.bkspc	* and loop
+	bra	.bspcl	* and loop
 *--------------------------------------------------------------------
 .notbs
 	bsr	fldsp	* check for field separator

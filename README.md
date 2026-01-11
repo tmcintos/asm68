@@ -52,8 +52,9 @@ Unless otherwise specified, the assembler generally follows the source conventio
 
 ### Extensions
 
-- `.` may be used as PC in expressions
+- ‘.’ may be used as PC
 - `;` may be used instead of `*` to introduce comments
+- `\` may be used to continue a line
 
 ### Unimplemented directives
 
@@ -66,12 +67,10 @@ Unless otherwise specified, the assembler generally follows the source conventio
 
 ### Unimplemented features
 
-- `*` as PC in expressions
 - `@` octal prefix
 - `%` binary prefix
 - `$` in symbol name
 - `.` in middle of symbol name
-- `\` line continuation character
 - signed arithmetic, greater than 16 bits
 - forward references in FCB directives.
 
@@ -84,6 +83,8 @@ Unless otherwise specified, the assembler generally follows the source conventio
 	- Use of forward reference in EQU or ORG directives.
 	- Source or program buffer overflow.
 - Support for signed division removed; tests have NOT been updated.
+- `\` is treated as a continuation character only outside of quotes
+- `\` at end of a quoted string is treated as a literal character
 
 ## Memory Layout
 
