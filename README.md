@@ -64,9 +64,9 @@ Unless otherwise specified, the assembler generally follows the source conventio
 In scope
 
 - BSZ
+- FILL
 - RMB
 - ZMB
-- FILL
 
 Out of scope
 
@@ -80,6 +80,7 @@ In scope
 - `*` as PC in expressions
 - `@` octal prefix
 - `%` binary prefix
+- forward references in FCB directives (must be forced to 8-bit)
 
 Out of scope
 
@@ -87,7 +88,6 @@ Out of scope
 - `.` in middle of symbol name
 - `\` line continuation character
 - signed arithmetic, greater than 16 bits
-- forward references in FCB directives.
 
 ## Caveats
 
