@@ -61,18 +61,28 @@ Unless otherwise specified, the assembler generally follows the source conventio
 
 ### Unimplemented directives
 
+In scope
+
 - BSZ
-- FILL
-- OPT
-- PAGE
 - RMB
 - ZMB
+- FILL
+
+Out of scope
+
+- OPT
+- PAGE
 
 ### Unimplemented features
+
+In scope
 
 - `*` as PC in expressions
 - `@` octal prefix
 - `%` binary prefix
+
+Out of scope
+
 - `$` in symbol name
 - `.` in middle of symbol name
 - `\` line continuation character
